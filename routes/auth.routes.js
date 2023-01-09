@@ -11,6 +11,7 @@ const Comment = require("../models/Comment");
 const multer = require("multer")
 const path = require('path');
 const Tag = require('../models/Tag')
+const { cwd } = require('node:process')
 
 router.post('/registration',
     [
@@ -219,7 +220,8 @@ router.post('/post',
 router.get('/images/:image',
 async (req, res) => {
     try {
-        res.sendFile(path.join(path.resolve(), "uploads", req.params.image)) 
+        res.sendFile(path.join(path.resolve(), "uploads", req.params.image))
+        console.info(`You are currently in ${cwd()}`) 
     } catch (e) {
         console.log(e)
         res.send({message: "Server error"})
